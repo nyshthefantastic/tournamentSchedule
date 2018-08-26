@@ -28,7 +28,7 @@ public class displaySchedule extends javax.swing.JFrame {
     List<String> arr = new ArrayList<>();
     List<String> finalizedTeam1 = new ArrayList<>();
     List<String> finalizedTeam2 = new ArrayList<>();
-     List<Integer> finalizeddayofweek = new ArrayList<>();
+    List<Integer> finalizeddayofweek = new ArrayList<>();
     List<Integer> finalizedweek = new ArrayList<>();
     List<String> finalizedymd = new ArrayList<>();
 
@@ -105,21 +105,35 @@ public class displaySchedule extends javax.swing.JFrame {
                 int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
                 int weekNo = c.get(Calendar.WEEK_OF_MONTH);
                 count = 0;
-                
+
                 while (strarr.length > count) {
                     String booleanDay = strarr[count][2 + dayOfWeek];
+                    int xxx = 999;
+                    int yyy = 999;
                     if (booleanDay.equals("true")) {
                         if (strarr[count][1].equals("YES")) {
 
                         } else {
-                            for(int x=0;x<finalizedTeam1.size();x++){
-                                if(weekNo==finalizedweek.get(x)){
-                                
+                            for (int x = 0; x < finalizedTeam1.size(); x++) {
+                                if ((weekNo == finalizedweek.get(x))&&strarr[count][0].equals(finalizedTeam1.get(x))) {
+                                    xxx = 1;
+                                    yyy = 888;
+                                    break;
                                 }
                             }
-                             for(int x=0;x<finalizedTeam2.size();x++){
+//                            if (yyy != 888) {
+//                                for (int x = 0; x < finalizedTeam2.size(); x++) {
+//                                    if ((weekNo == finalizedweek.get(x))&&strarr[count][0].equals(finalizedTeam2.get(x))) {                                        xxx = 1;
+//                                        yyy = 888;
+//                                        break;
+//                                    }
+//                                }
+//                            }
+                        }
+                        if(xxx!=1){
                             
-                            }
+                            //SEARCH FOR THE MATCHING TEAM HERE THEN ADD THE TEAMS TO THE LISTS 
+                        
                         }
                     }
                     count++;
