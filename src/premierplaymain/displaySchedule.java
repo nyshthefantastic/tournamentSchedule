@@ -25,82 +25,102 @@ public class displaySchedule extends javax.swing.JFrame {
     /**
      * Creates new form displaySchedule
      */
-    List<String> arr=new ArrayList<>();
+    List<String> arr = new ArrayList<>();
+    List<String> finalizedTeam1 = new ArrayList<>();
+    List<String> finalizedTeam2 = new ArrayList<>();
+     List<Integer> finalizeddayofweek = new ArrayList<>();
+    List<Integer> finalizedweek = new ArrayList<>();
+    List<String> finalizedymd = new ArrayList<>();
+
     public displaySchedule(List<String> newArr) {
         initComponents();
-        arr=newArr;
+        arr = newArr;
         displayer();
     }
+
     public void displayer() {
-        int size=arr.size();
+        int size = arr.size();
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        String[][] strarr=new String[size][10];
-        int counter=0;
-        int count=0;
-        while(size>counter){
-            for(int a=0;a<10;a++){
-                strarr[count][a]=arr.get(counter+a);
-                System.out.print("  :   "+strarr[count][a]+" :   ");
+        String[][] strarr = new String[size][10];
+        int counter = 0;
+        int count = 0;
+        while (size > counter) {
+            for (int a = 0; a < 10; a++) {
+                strarr[count][a] = arr.get(counter + a);
+                System.out.print("  :   " + strarr[count][a] + " :   ");
             }
             System.out.println("");
             count++;
-            counter=counter+10;
+            counter = counter + 10;
         }
         YearMonth yearMonthObject = YearMonth.of(year, Month.valueOf(arr.get(9)));
         int daysInMonth = yearMonthObject.lengthOfMonth(); //28  
-        String[] dayOfMonth={"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18",
-            "19","20","21","22","23","24","25","26","27","28","29","30","31"};
-        counter=0;
-        String monthint="";
-        if(arr.get(9).equals("JANUARY")){
-            monthint="01";
+        String[] dayOfMonth = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18",
+            "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+        counter = 0;
+        String monthint = "";
+        if (arr.get(9).equals("JANUARY")) {
+            monthint = "01";
         }
-        if(arr.get(9).equals("FEBRUARY")){
-            monthint="02";
+        if (arr.get(9).equals("FEBRUARY")) {
+            monthint = "02";
         }
-        if(arr.get(9).equals("MARCH")){
-            monthint="03";
+        if (arr.get(9).equals("MARCH")) {
+            monthint = "03";
         }
-        if(arr.get(9).equals("APRIL")){
-            monthint="04";
+        if (arr.get(9).equals("APRIL")) {
+            monthint = "04";
         }
-        if(arr.get(9).equals("MAY")){
-            monthint="05";
+        if (arr.get(9).equals("MAY")) {
+            monthint = "05";
         }
-        if(arr.get(9).equals("JUNE")){
-            monthint="06";
+        if (arr.get(9).equals("JUNE")) {
+            monthint = "06";
         }
-        if(arr.get(9).equals("JULY")){
-            monthint="07";
+        if (arr.get(9).equals("JULY")) {
+            monthint = "07";
         }
-        if(arr.get(9).equals("AUGUST")){
-            monthint="08";
+        if (arr.get(9).equals("AUGUST")) {
+            monthint = "08";
         }
-        if(arr.get(9).equals("SEPTEMBER")){
-            monthint="09";
+        if (arr.get(9).equals("SEPTEMBER")) {
+            monthint = "09";
         }
-        if(arr.get(9).equals("OCTOBER")){
-            monthint="10";
+        if (arr.get(9).equals("OCTOBER")) {
+            monthint = "10";
         }
-        if(arr.get(9).equals("NOVEMBER")){
-            monthint="11";
+        if (arr.get(9).equals("NOVEMBER")) {
+            monthint = "11";
         }
-        if(arr.get(9).equals("DECEMBER")){
-            monthint="12";
+        if (arr.get(9).equals("DECEMBER")) {
+            monthint = "12";
         }
-        while(daysInMonth>counter){
+        while (daysInMonth > counter) {
             try {
-                String ymd=String.valueOf(year)+"-"+monthint+"-"+dayOfMonth[counter];
-                SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd");
-                Date todaysDate=sf.parse(ymd);
+                String ymd = String.valueOf(year) + "-" + monthint + "-" + dayOfMonth[counter];
+                SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+                Date todaysDate = sf.parse(ymd);
                 Calendar c = Calendar.getInstance();
                 c.setTime(todaysDate);
-                int dayOfWeek=c.get(Calendar.DAY_OF_WEEK);
-                count=0;
-                while(strarr.length>count){
-                    String booleanDay=strarr[count][2+dayOfWeek];
-                    if(booleanDay.equals("true")){
-                        
+                int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+                int weekNo = c.get(Calendar.WEEK_OF_MONTH);
+                count = 0;
+                
+                while (strarr.length > count) {
+                    String booleanDay = strarr[count][2 + dayOfWeek];
+                    if (booleanDay.equals("true")) {
+                        if (strarr[count][1].equals("YES")) {
+
+                        } else {
+                            for(int x=0;x<finalizedTeam1.size();x++){
+                                if(weekNo==finalizedweek.get(x)){
+                                
+                                }
+                            }
+                             for(int x=0;x<finalizedTeam2.size();x++){
+                            
+                            }
+                        }
                     }
                     count++;
                 }
@@ -108,10 +128,10 @@ public class displaySchedule extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 Logger.getLogger(displaySchedule.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
-        
+
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -170,7 +190,7 @@ public class displaySchedule extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                List<String>af=new ArrayList<String>();
+                List<String> af = new ArrayList<String>();
                 new displaySchedule(af).setVisible(true);
             }
         });
