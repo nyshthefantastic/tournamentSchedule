@@ -254,18 +254,23 @@ public class TeamDetails extends javax.swing.JFrame {
 
         String teamName = jTextField1.getText();
         String premier = jComboBox1.getSelectedItem().toString();
-        String month=jComboBox2.getSelectedItem().toString();
+        String month = jComboBox2.getSelectedItem().toString();
+        boolean sundayB = jCheckBox7.isSelected();
         boolean mondayB = jCheckBox1.isSelected();
         boolean tuesdayB = jCheckBox3.isSelected();
         boolean wednesdayB = jCheckBox4.isSelected();
         boolean thursdayB = jCheckBox2.isSelected();
         boolean fridayB = jCheckBox6.isSelected();
         boolean satudayB = jCheckBox5.isSelected();
-        boolean sundayB = jCheckBox7.isSelected();
 
         newArr.add(teamName);
         newArr.add(premier);
         newArr.add(month);
+         if (sundayB) {
+            newArr.add("true");
+        } else {
+            newArr.add("false");
+        }
         if (mondayB) {
             newArr.add("true");
         } else {
@@ -296,11 +301,7 @@ public class TeamDetails extends javax.swing.JFrame {
         } else {
             newArr.add("false");
         }
-        if (sundayB) {
-            newArr.add("true");
-        } else {
-            newArr.add("false");
-        }
+       
         jTextField1.setText("");
         jComboBox1.setSelectedItem("YES");
 
@@ -318,7 +319,7 @@ public class TeamDetails extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        displaySchedule ds=new displaySchedule(newArr);
+        displaySchedule ds = new displaySchedule(newArr);
         ds.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

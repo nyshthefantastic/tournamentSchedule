@@ -26,6 +26,8 @@ public class displaySchedule extends javax.swing.JFrame {
      * Creates new form displaySchedule
      */
     List<String> arr = new ArrayList<>();
+    List<String> finalizedTeam = new ArrayList<>();
+
     List<String> finalizedTeam1 = new ArrayList<>();
     List<String> finalizedTeam2 = new ArrayList<>();
     List<Integer> finalizeddayofweek = new ArrayList<>();
@@ -41,7 +43,7 @@ public class displaySchedule extends javax.swing.JFrame {
     public void displayer() {
         int size = arr.size();
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        String[][] strarr = new String[size][10];
+        String[][] strarr = new String[size / 10][10];
         int counter = 0;
         int count = 0;
         while (size > counter) {
@@ -53,46 +55,72 @@ public class displaySchedule extends javax.swing.JFrame {
             count++;
             counter = counter + 10;
         }
-        YearMonth yearMonthObject = YearMonth.of(year, Month.valueOf(arr.get(9)));
+        int mer = 0;
+        if (arr.get(2).equals("JANUARY")) {
+            mer = 1;
+        } else if (arr.get(2).equals("FEBRUARY")) {
+            mer = 2;
+        } else if (arr.get(2).equals("MARCH")) {
+            mer = 3;
+        } else if (arr.get(2).equals("APRIL")) {
+            mer = 4;
+        } else if (arr.get(2).equals("MAY")) {
+            mer = 5;
+        } else if (arr.get(2).equals("JUNE")) {
+            mer = 6;
+        } else if (arr.get(2).equals("JULY")) {
+            mer = 7;
+        } else if (arr.get(2).equals("AUGUST")) {
+            mer = 8;
+        } else if (arr.get(2).equals("SEPTEMBER")) {
+            mer = 9;
+        } else if (arr.get(2).equals("OCTOBER")) {
+            mer = 10;
+        } else if (arr.get(2).equals("NOVEMBER")) {
+            mer = 11;
+        } else if (arr.get(2).equals("DECEMBER")) {
+            mer = 12;
+        }
+        YearMonth yearMonthObject = YearMonth.of(year, Month.valueOf(arr.get(2)));
         int daysInMonth = yearMonthObject.lengthOfMonth(); //28  
         String[] dayOfMonth = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18",
             "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
         counter = 0;
         String monthint = "";
-        if (arr.get(9).equals("JANUARY")) {
+        if (arr.get(2).equals("JANUARY")) {
             monthint = "01";
         }
-        if (arr.get(9).equals("FEBRUARY")) {
+        if (arr.get(2).equals("FEBRUARY")) {
             monthint = "02";
         }
-        if (arr.get(9).equals("MARCH")) {
+        if (arr.get(2).equals("MARCH")) {
             monthint = "03";
         }
-        if (arr.get(9).equals("APRIL")) {
+        if (arr.get(2).equals("APRIL")) {
             monthint = "04";
         }
-        if (arr.get(9).equals("MAY")) {
+        if (arr.get(2).equals("MAY")) {
             monthint = "05";
         }
-        if (arr.get(9).equals("JUNE")) {
+        if (arr.get(2).equals("JUNE")) {
             monthint = "06";
         }
-        if (arr.get(9).equals("JULY")) {
+        if (arr.get(2).equals("JULY")) {
             monthint = "07";
         }
-        if (arr.get(9).equals("AUGUST")) {
+        if (arr.get(2).equals("AUGUST")) {
             monthint = "08";
         }
-        if (arr.get(9).equals("SEPTEMBER")) {
+        if (arr.get(2).equals("SEPTEMBER")) {
             monthint = "09";
         }
-        if (arr.get(9).equals("OCTOBER")) {
+        if (arr.get(2).equals("OCTOBER")) {
             monthint = "10";
         }
-        if (arr.get(9).equals("NOVEMBER")) {
+        if (arr.get(2).equals("NOVEMBER")) {
             monthint = "11";
         }
-        if (arr.get(9).equals("DECEMBER")) {
+        if (arr.get(2).equals("DECEMBER")) {
             monthint = "12";
         }
         while (daysInMonth > counter) {
@@ -105,22 +133,53 @@ public class displaySchedule extends javax.swing.JFrame {
                 int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
                 int weekNo = c.get(Calendar.WEEK_OF_MONTH);
                 count = 0;
-
+                int mmm = 9999;
                 while (strarr.length > count) {
                     String booleanDay = strarr[count][2 + dayOfWeek];
                     int xxx = 999;
-                    int yyy = 999;
+                    boolean zzz = false;
+
                     if (booleanDay.equals("true")) {
                         if (strarr[count][1].equals("YES")) {
 
                         } else {
                             for (int x = 0; x < finalizedTeam1.size(); x++) {
-                                if ((weekNo == finalizedweek.get(x))&&strarr[count][0].equals(finalizedTeam1.get(x))) {
-                                    xxx = 1;
-                                    yyy = 888;
+                                if ((weekNo == finalizedweek.get(x)) && finalizedTeam.contains(strarr[count][0])) {
+                                    zzz = true;
+
                                     break;
                                 }
                             }
+                            if (mmm == 9999 && zzz != true) {
+                                mmm = count;
+                                zzz = false;
+                            }
+
+                            if (mmm != 9999 && zzz != true) {
+
+                                boolean xcv = false;
+                                for (int ggg = 0; ggg < finalizedTeam1.size(); ggg++) {
+                                    if (((finalizedTeam1.get(ggg).equals(strarr[mmm][0])) && (finalizedTeam2.get(ggg).equals(strarr[count][0])))) {
+                                        xcv = true;
+                                        break;
+                                    }
+
+                                }
+                                if (xcv == false &&!strarr[mmm][0].equals(strarr[count][0])) {
+                                    finalizedTeam.add(strarr[mmm][0]);
+                                    finalizedTeam.add(strarr[count][0]);
+                                    finalizedTeam1.add(strarr[mmm][0]);
+                                    finalizedTeam2.add(strarr[count][0]);
+                                    finalizeddayofweek.add(dayOfWeek);
+                                    finalizedweek.add(weekNo);
+                                    finalizedymd.add(ymd);
+                                    mmm = 9999;
+                                    zzz = false;
+
+                                }
+
+                            }
+
 //                            if (yyy != 888) {
 //                                for (int x = 0; x < finalizedTeam2.size(); x++) {
 //                                    if ((weekNo == finalizedweek.get(x))&&strarr[count][0].equals(finalizedTeam2.get(x))) {                                        xxx = 1;
@@ -130,11 +189,16 @@ public class displaySchedule extends javax.swing.JFrame {
 //                                }
 //                            }
                         }
-                        if(xxx!=1){
-                            
-                            //SEARCH FOR THE MATCHING TEAM HERE THEN ADD THE TEAMS TO THE LISTS 
-                        
-                        }
+//                        if (xxx != 1) {
+//
+//                            //SEARCH FOR THE MATCHING TEAM HERE THEN ADD THE TEAMS TO THE LISTS 
+//                            for (int x = 0; x < finalizedTeam2.size(); x++) {
+//                                if ((weekNo == finalizedweek.get(x)) && strarr[count][0].equals(finalizedTeam2.get(x))) {
+//                                    xxx = 1;
+//                                    break;
+//                                }
+//                            }
+//                        }
                     }
                     count++;
                 }
@@ -142,6 +206,11 @@ public class displaySchedule extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 Logger.getLogger(displaySchedule.class.getName()).log(Level.SEVERE, null, ex);
             }
+            System.out.println(finalizedTeam1.toString());
+            System.out.println("==========================");
+            System.out.println(finalizedTeam2.toString());
+            System.out.println("==========================");
+            System.out.println(finalizedweek.toString());
 
         }
     }
