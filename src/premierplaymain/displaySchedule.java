@@ -138,67 +138,59 @@ public class displaySchedule extends javax.swing.JFrame {
                     String booleanDay = strarr[count][2 + dayOfWeek];
                     int xxx = 999;
                     boolean zzz = false;
-
+                    int dfg = 0;
                     if (booleanDay.equals("true")) {
                         if (strarr[count][1].equals("YES")) {
+                            for (int lkj = 0; lkj < finalizedTeam1.size(); lkj++) {
+                                if (weekNo == finalizedweek.get(lkj)) {
+                                    if (finalizedTeam1.get(lkj).equals(strarr[count][0]) || finalizedTeam2.get(lkj).equals(strarr[count][0])) {
+                                        dfg++;
+                                    }
+                                }
+                            }
+                            if (dfg > 1) {
+                                zzz = true;
+                            }
 
                         } else {
                             for (int x = 0; x < finalizedTeam1.size(); x++) {
-                                if ((weekNo == finalizedweek.get(x)) && finalizedTeam.contains(strarr[count][0])) {
+                                if ((weekNo == finalizedweek.get(x)) && (finalizedTeam1.get(x).equals(strarr[count][0]) || finalizedTeam2.get(x).equals(strarr[count][0]))) {
                                     zzz = true;
 
                                     break;
                                 }
                             }
-                            if (mmm == 9999 && zzz != true) {
-                                mmm = count;
-                                zzz = false;
-                            }
-
-                            if (mmm != 9999 && zzz != true) {
-
-                                boolean xcv = false;
-                                for (int ggg = 0; ggg < finalizedTeam1.size(); ggg++) {
-                                    if (((finalizedTeam1.get(ggg).equals(strarr[mmm][0])) && (finalizedTeam2.get(ggg).equals(strarr[count][0])))) {
-                                        xcv = true;
-                                        break;
-                                    }
-
-                                }
-                                if (xcv == false &&!strarr[mmm][0].equals(strarr[count][0])) {
-                                    finalizedTeam.add(strarr[mmm][0]);
-                                    finalizedTeam.add(strarr[count][0]);
-                                    finalizedTeam1.add(strarr[mmm][0]);
-                                    finalizedTeam2.add(strarr[count][0]);
-                                    finalizeddayofweek.add(dayOfWeek);
-                                    finalizedweek.add(weekNo);
-                                    finalizedymd.add(ymd);
-                                    mmm = 9999;
-                                    zzz = false;
-
-                                }
-
-                            }
-
-//                            if (yyy != 888) {
-//                                for (int x = 0; x < finalizedTeam2.size(); x++) {
-//                                    if ((weekNo == finalizedweek.get(x))&&strarr[count][0].equals(finalizedTeam2.get(x))) {                                        xxx = 1;
-//                                        yyy = 888;
-//                                        break;
-//                                    }
-//                                }
-//                            }
                         }
-//                        if (xxx != 1) {
-//
-//                            //SEARCH FOR THE MATCHING TEAM HERE THEN ADD THE TEAMS TO THE LISTS 
-//                            for (int x = 0; x < finalizedTeam2.size(); x++) {
-//                                if ((weekNo == finalizedweek.get(x)) && strarr[count][0].equals(finalizedTeam2.get(x))) {
-//                                    xxx = 1;
-//                                    break;
-//                                }
-//                            }
-//                        }
+                        if (mmm == 9999 && zzz != true) {
+                            mmm = count;
+                            zzz = false;
+                        }
+
+                        if (mmm != 9999 && zzz != true) {
+
+                            boolean xcv = false;
+                            for (int ggg = 0; ggg < finalizedTeam1.size(); ggg++) {
+                                if (((finalizedTeam1.get(ggg).equals(strarr[mmm][0])) && (finalizedTeam2.get(ggg).equals(strarr[count][0])))) {
+                                    xcv = true;
+                                    break;
+                                }
+
+                            }
+                            if (xcv == false && !strarr[mmm][0].equals(strarr[count][0])) {
+                                finalizedTeam.add(strarr[mmm][0]);
+                                finalizedTeam.add(strarr[count][0]);
+                                finalizedTeam1.add(strarr[mmm][0]);
+                                finalizedTeam2.add(strarr[count][0]);
+                                finalizeddayofweek.add(dayOfWeek);
+                                finalizedweek.add(weekNo);
+                                finalizedymd.add(ymd);
+                                mmm = 9999;
+                                zzz = false;
+
+                            }
+
+                        }
+
                     }
                     count++;
                 }
@@ -206,6 +198,8 @@ public class displaySchedule extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 Logger.getLogger(displaySchedule.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            
             System.out.println(finalizedTeam1.toString());
             System.out.println("==========================");
             System.out.println(finalizedTeam2.toString());
@@ -213,6 +207,14 @@ public class displaySchedule extends javax.swing.JFrame {
             System.out.println(finalizedweek.toString());
 
         }
+        
+        for(int q=0;q<finalizedTeam1.size();q++){
+            jTextArea1.append(finalizedTeam1.get(q)+"\t"+finalizedTeam2.get(q)+"\t"+finalizedymd.get(q));
+            jTextArea1.append("\n");
+        
+        }
+        
+        
     }
 
     /**
@@ -224,20 +226,33 @@ public class displaySchedule extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1024, 728));
         setMinimumSize(new java.awt.Dimension(1024, 728));
         setPreferredSize(new java.awt.Dimension(1024, 728));
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 769, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         pack();
@@ -280,5 +295,7 @@ public class displaySchedule extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
