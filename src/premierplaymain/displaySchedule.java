@@ -37,23 +37,22 @@ public class displaySchedule extends javax.swing.JFrame {
     public displaySchedule(List<String> newArr) {
         initComponents();
         arr = newArr;
-        displayer();
+        dis();
     }
-
-    public void displayer() {
-        int size = arr.size();
+    public void dis(){
+                   int size = arr.size();
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        String[][] strarr = new String[size / 10][10];
+        String[][] strarr = new String[size / 11][11];
         int counter = 0;
         int count = 0;
         while (size > counter) {
-            for (int a = 0; a < 10; a++) {
+            for (int a = 0; a < 11; a++) {
                 strarr[count][a] = arr.get(counter + a);
                 System.out.print("  :   " + strarr[count][a] + " :   ");
             }
             System.out.println("");
             count++;
-            counter = counter + 10;
+            counter = counter + 11;
         }
         int mer = 0;
         if (arr.get(2).equals("JANUARY")) {
@@ -138,25 +137,25 @@ public class displaySchedule extends javax.swing.JFrame {
                     String booleanDay = strarr[count][2 + dayOfWeek];
                     int xxx = 999;
                     boolean zzz = false;
-
+                    int dfg = 0;
                     if (booleanDay.equals("true")) {
-                        if (strarr[count][1].equals("YES")) {
-
-                            int qwe = 0;
-                            for (int iop = 0; iop < finalizedTeam1.size(); iop++) {
-                                if (weekNo == finalizedweek.get(iop)) {
-                                    if (finalizedTeam1.get(iop).equals(strarr[count][0]) || finalizedTeam2.get(iop).equals(strarr[count][0])) {
-                                        qwe++;
+                        if (Integer.parseInt(strarr[count][10])>1) {
+                            for (int lkj = 0; lkj < finalizedTeam1.size(); lkj++) {
+                                if (weekNo == finalizedweek.get(lkj)) {
+                                    if (finalizedTeam1.get(lkj).equals(strarr[count][0]) || finalizedTeam2.get(lkj).equals(strarr[count][0])) {
+                                        dfg++;
                                     }
                                 }
                             }
-                            if (qwe > 1) {
+                            System.out.println("ooooooooooooooo"+Integer.parseInt(strarr[count][10])+":::"+strarr[count][0]);
+                            if (dfg >Integer.parseInt(strarr[count][10])) {
                                 zzz = true;
-
                             }
+
+                           
                         } else {
                             for (int x = 0; x < finalizedTeam1.size(); x++) {
-                                if ((weekNo == finalizedweek.get(x)) && finalizedTeam.contains(strarr[count][0])) {
+                                if ((weekNo == finalizedweek.get(x)) && (finalizedTeam1.get(x).equals(strarr[count][0]) || finalizedTeam2.get(x).equals(strarr[count][0]))) {
                                     zzz = true;
 
                                     break;
@@ -190,7 +189,17 @@ public class displaySchedule extends javax.swing.JFrame {
                                 zzz = false;
 
                             }
-
+                            if(xcv == true &&strarr[count][1].equals("YES")&&strarr[mmm][1].equals("YES")){
+                                finalizedTeam.add(strarr[mmm][0]);
+                                finalizedTeam.add(strarr[count][0]);
+                                finalizedTeam1.add(strarr[mmm][0]);
+                                finalizedTeam2.add(strarr[count][0]);
+                                finalizeddayofweek.add(dayOfWeek);
+                                finalizedweek.add(weekNo);
+                                finalizedymd.add(ymd);
+                                mmm = 9999;
+                                zzz = false;
+                            }
                         }
 
                     }
@@ -200,6 +209,8 @@ public class displaySchedule extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 Logger.getLogger(displaySchedule.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            
             System.out.println(finalizedTeam1.toString());
             System.out.println("==========================");
             System.out.println(finalizedTeam2.toString());
@@ -207,6 +218,203 @@ public class displaySchedule extends javax.swing.JFrame {
             System.out.println(finalizedweek.toString());
 
         }
+        
+        for(int q=0;q<finalizedTeam1.size();q++){
+            jTextArea1.append(finalizedTeam1.get(q)+"\t"+finalizedTeam2.get(q)+"\t"+finalizedymd.get(q));
+            jTextArea1.append("\n");
+        
+        }
+         
+
+
+    }
+    public void displayer() {
+//        int size = arr.size();
+//        int year = Calendar.getInstance().get(Calendar.YEAR);
+//        String[][] strarr = new String[size / 11][11];
+//        int counter = 0;
+//        int count = 0;
+//        while (size > counter) {
+//            for (int a = 0; a < 11; a++) {
+//                strarr[count][a] = arr.get(counter + a);
+//                System.out.print("  :   " + strarr[count][a] + " :   ");
+//            }
+//            System.out.println("");
+//            count++;
+//            counter = counter + 11;
+//        }
+//        int mer = 0;
+//        if (arr.get(2).equals("JANUARY")) {
+//            mer = 1;
+//        } else if (arr.get(2).equals("FEBRUARY")) {
+//            mer = 2;
+//        } else if (arr.get(2).equals("MARCH")) {
+//            mer = 3;
+//        } else if (arr.get(2).equals("APRIL")) {
+//            mer = 4;
+//        } else if (arr.get(2).equals("MAY")) {
+//            mer = 5;
+//        } else if (arr.get(2).equals("JUNE")) {
+//            mer = 6;
+//        } else if (arr.get(2).equals("JULY")) {
+//            mer = 7;
+//        } else if (arr.get(2).equals("AUGUST")) {
+//            mer = 8;
+//        } else if (arr.get(2).equals("SEPTEMBER")) {
+//            mer = 9;
+//        } else if (arr.get(2).equals("OCTOBER")) {
+//            mer = 10;
+//        } else if (arr.get(2).equals("NOVEMBER")) {
+//            mer = 11;
+//        } else if (arr.get(2).equals("DECEMBER")) {
+//            mer = 12;
+//        }
+//        YearMonth yearMonthObject = YearMonth.of(year, Month.valueOf(arr.get(2)));
+//        int daysInMonth = yearMonthObject.lengthOfMonth(); //28  
+//        String[] dayOfMonth = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18",
+//            "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+//        counter = 0;
+//        String monthint = "";
+//        if (arr.get(2).equals("JANUARY")) {
+//            monthint = "01";
+//        }
+//        if (arr.get(2).equals("FEBRUARY")) {
+//            monthint = "02";
+//        }
+//        if (arr.get(2).equals("MARCH")) {
+//            monthint = "03";
+//        }
+//        if (arr.get(2).equals("APRIL")) {
+//            monthint = "04";
+//        }
+//        if (arr.get(2).equals("MAY")) {
+//            monthint = "05";
+//        }
+//        if (arr.get(2).equals("JUNE")) {
+//            monthint = "06";
+//        }
+//        if (arr.get(2).equals("JULY")) {
+//            monthint = "07";
+//        }
+//        if (arr.get(2).equals("AUGUST")) {
+//            monthint = "08";
+//        }
+//        if (arr.get(2).equals("SEPTEMBER")) {
+//            monthint = "09";
+//        }
+//        if (arr.get(2).equals("OCTOBER")) {
+//            monthint = "10";
+//        }
+//        if (arr.get(2).equals("NOVEMBER")) {
+//            monthint = "11";
+//        }
+//        if (arr.get(2).equals("DECEMBER")) {
+//            monthint = "12";
+//        }
+//        while (daysInMonth > counter) {
+//            try {
+//                String ymd = String.valueOf(year) + "-" + monthint + "-" + dayOfMonth[counter];
+//                SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+//                Date todaysDate = sf.parse(ymd);
+//                Calendar c = Calendar.getInstance();
+//                c.setTime(todaysDate);
+//                int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+//                int weekNo = c.get(Calendar.WEEK_OF_MONTH);
+//                count = 0;
+//                int mmm = 9999;
+//                while (strarr.length > count) {
+//                    String booleanDay = strarr[count][2 + dayOfWeek];
+//                    int xxx = 999;
+//                    boolean zzz = false;
+//                    int dfg = 0;
+//                    if (booleanDay.equals("true")) {
+//                        if (strarr[count][1].equals("YES")) {
+//                            for (int lkj = 0; lkj < finalizedTeam1.size(); lkj++) {
+//                                if (weekNo == finalizedweek.get(lkj)) {
+//                                    if (finalizedTeam1.get(lkj).equals(strarr[count][0]) || finalizedTeam2.get(lkj).equals(strarr[count][0])) {
+//                                        dfg++;
+//                                    }
+//                                }
+//                            }
+//                            if (dfg > 1) {
+//                                zzz = true;
+//                            }
+//
+//                            int qwe = 0;
+//                            for (int iop = 0; iop < finalizedTeam1.size(); iop++) {
+//                                if (weekNo == finalizedweek.get(iop)) {
+//                                    if (finalizedTeam1.get(iop).equals(strarr[count][0]) || finalizedTeam2.get(iop).equals(strarr[count][0])) {
+//                                        qwe++;
+//                                    }
+//                                }
+//                            }
+//                            if (qwe > 1) {
+//                                zzz = true;
+//
+//                            }
+//                        } else {
+//                            for (int x = 0; x < finalizedTeam1.size(); x++) {
+//                                if ((weekNo == finalizedweek.get(x)) && (finalizedTeam1.get(x).equals(strarr[count][0]) || finalizedTeam2.get(x).equals(strarr[count][0]))) {
+//                                    zzz = true;
+//
+//                                    break;
+//                                }
+//                            }
+//                        }
+//                        if (mmm == 9999 && zzz != true) {
+//                            mmm = count;
+//                            zzz = false;
+//                        }
+//
+//                        if (mmm != 9999 && zzz != true) {
+//
+//                            boolean xcv = false;
+//                            for (int ggg = 0; ggg < finalizedTeam1.size(); ggg++) {
+//                                if (((finalizedTeam1.get(ggg).equals(strarr[mmm][0])) && (finalizedTeam2.get(ggg).equals(strarr[count][0])))) {
+//                                    xcv = true;
+//                                    break;
+//                                }
+//
+//                            }
+//                            if (xcv == false && !strarr[mmm][0].equals(strarr[count][0])) {
+//                                finalizedTeam.add(strarr[mmm][0]);
+//                                finalizedTeam.add(strarr[count][0]);
+//                                finalizedTeam1.add(strarr[mmm][0]);
+//                                finalizedTeam2.add(strarr[count][0]);
+//                                finalizeddayofweek.add(dayOfWeek);
+//                                finalizedweek.add(weekNo);
+//                                finalizedymd.add(ymd);
+//                                mmm = 9999;
+//                                zzz = false;
+//
+//                            }
+//
+//                        }
+//
+//                    }
+//                    count++;
+//                }
+//                counter++;
+//            } catch (ParseException ex) {
+//                Logger.getLogger(displaySchedule.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            
+//            
+//            System.out.println(finalizedTeam1.toString());
+//            System.out.println("==========================");
+//            System.out.println(finalizedTeam2.toString());
+//            System.out.println("==========================");
+//            System.out.println(finalizedweek.toString());
+//
+//        }
+//        
+//        for(int q=0;q<finalizedTeam1.size();q++){
+//            jTextArea1.append(finalizedTeam1.get(q)+"\t"+finalizedTeam2.get(q)+"\t"+finalizedymd.get(q));
+//            jTextArea1.append("\n");
+//        
+//        }
+        
+        
     }
 
     /**
@@ -218,20 +426,33 @@ public class displaySchedule extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1024, 728));
         setMinimumSize(new java.awt.Dimension(1024, 728));
         setPreferredSize(new java.awt.Dimension(1024, 728));
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 769, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         pack();
@@ -274,5 +495,7 @@ public class displaySchedule extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
