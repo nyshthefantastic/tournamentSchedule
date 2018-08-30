@@ -142,6 +142,18 @@ public class displaySchedule extends javax.swing.JFrame {
                     if (booleanDay.equals("true")) {
                         if (strarr[count][1].equals("YES")) {
 
+                            int qwe = 0;
+                            for (int iop = 0; iop < finalizedTeam1.size(); iop++) {
+                                if (weekNo == finalizedweek.get(iop)) {
+                                    if (finalizedTeam1.get(iop).equals(strarr[count][0]) || finalizedTeam2.get(iop).equals(strarr[count][0])) {
+                                        qwe++;
+                                    }
+                                }
+                            }
+                            if (qwe > 1) {
+                                zzz = true;
+
+                            }
                         } else {
                             for (int x = 0; x < finalizedTeam1.size(); x++) {
                                 if ((weekNo == finalizedweek.get(x)) && finalizedTeam.contains(strarr[count][0])) {
@@ -150,55 +162,37 @@ public class displaySchedule extends javax.swing.JFrame {
                                     break;
                                 }
                             }
-                            if (mmm == 9999 && zzz != true) {
-                                mmm = count;
-                                zzz = false;
-                            }
-
-                            if (mmm != 9999 && zzz != true) {
-
-                                boolean xcv = false;
-                                for (int ggg = 0; ggg < finalizedTeam1.size(); ggg++) {
-                                    if (((finalizedTeam1.get(ggg).equals(strarr[mmm][0])) && (finalizedTeam2.get(ggg).equals(strarr[count][0])))) {
-                                        xcv = true;
-                                        break;
-                                    }
-
-                                }
-                                if (xcv == false &&!strarr[mmm][0].equals(strarr[count][0])) {
-                                    finalizedTeam.add(strarr[mmm][0]);
-                                    finalizedTeam.add(strarr[count][0]);
-                                    finalizedTeam1.add(strarr[mmm][0]);
-                                    finalizedTeam2.add(strarr[count][0]);
-                                    finalizeddayofweek.add(dayOfWeek);
-                                    finalizedweek.add(weekNo);
-                                    finalizedymd.add(ymd);
-                                    mmm = 9999;
-                                    zzz = false;
-
-                                }
-
-                            }
-
-//                            if (yyy != 888) {
-//                                for (int x = 0; x < finalizedTeam2.size(); x++) {
-//                                    if ((weekNo == finalizedweek.get(x))&&strarr[count][0].equals(finalizedTeam2.get(x))) {                                        xxx = 1;
-//                                        yyy = 888;
-//                                        break;
-//                                    }
-//                                }
-//                            }
                         }
-//                        if (xxx != 1) {
-//
-//                            //SEARCH FOR THE MATCHING TEAM HERE THEN ADD THE TEAMS TO THE LISTS 
-//                            for (int x = 0; x < finalizedTeam2.size(); x++) {
-//                                if ((weekNo == finalizedweek.get(x)) && strarr[count][0].equals(finalizedTeam2.get(x))) {
-//                                    xxx = 1;
-//                                    break;
-//                                }
-//                            }
-//                        }
+                        if (mmm == 9999 && zzz != true) {
+                            mmm = count;
+                            zzz = false;
+                        }
+
+                        if (mmm != 9999 && zzz != true) {
+
+                            boolean xcv = false;
+                            for (int ggg = 0; ggg < finalizedTeam1.size(); ggg++) {
+                                if (((finalizedTeam1.get(ggg).equals(strarr[mmm][0])) && (finalizedTeam2.get(ggg).equals(strarr[count][0])))) {
+                                    xcv = true;
+                                    break;
+                                }
+
+                            }
+                            if (xcv == false && !strarr[mmm][0].equals(strarr[count][0])) {
+                                finalizedTeam.add(strarr[mmm][0]);
+                                finalizedTeam.add(strarr[count][0]);
+                                finalizedTeam1.add(strarr[mmm][0]);
+                                finalizedTeam2.add(strarr[count][0]);
+                                finalizeddayofweek.add(dayOfWeek);
+                                finalizedweek.add(weekNo);
+                                finalizedymd.add(ymd);
+                                mmm = 9999;
+                                zzz = false;
+
+                            }
+
+                        }
+
                     }
                     count++;
                 }
